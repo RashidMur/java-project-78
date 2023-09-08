@@ -8,9 +8,10 @@ public class BaseSchema {
 
     private List<Predicate<Object>> predicates = new ArrayList<>();
 
+
     /**
      *
-     * @return
+     * @return predicates
      */
     public List<Predicate<Object>> getPredicates() {
         return predicates;
@@ -19,7 +20,7 @@ public class BaseSchema {
     /**
      *
      * @param obj
-     * @return
+     * @return predicates.stream().allMatch(v -> v.test(obj))
      */
     public boolean isValid(Object obj) {
         return predicates.stream().allMatch(v -> v.test(obj));
