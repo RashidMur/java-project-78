@@ -6,23 +6,24 @@ import java.util.function.Predicate;
 
 public class BaseSchema {
 
-    private List<Predicate<Object>> predicates = new ArrayList<>();
+    protected List<Predicate<Object>> predicates = new ArrayList<>();
 
 
     /**
      *
-     * @return predicates
+     * @return return a ArrayList of checks
      */
-    public List<Predicate<Object>> getPredicates() {
-        return predicates;
-    }
+    protected List<Predicate<Object>> addValidation() {
+         return predicates;
+     }
 
     /**
      *
-     * @param obj
-     * @return predicates.stream().allMatch(v -> v.test(obj))
+     * @param obj we get a list of tests
+     * @return check if all tests are true
      */
     public boolean isValid(Object obj) {
+
         return predicates.stream().allMatch(v -> v.test(obj));
     }
 }

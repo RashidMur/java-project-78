@@ -11,30 +11,31 @@ public final class TestNumberSchema {
     private NumberSchema numberSchema;
 
     @BeforeEach
-    public void inputTestScheme() {
+    public void inputTestSchema() {
         Validator validator = new Validator();
         numberSchema = validator.number();
     }
     @Test
-    public void integerTest() {
+    public void testRequired() {
         assertTrue(numberSchema.isValid(0));
         assertTrue(numberSchema.isValid(15));
 
         assertFalse(numberSchema.required().isValid(null));
+
         assertFalse(numberSchema.isValid("inputNumber"));
         assertFalse(numberSchema.isValid(null));
         assertFalse(numberSchema.isValid(25.55));
     }
 
     @Test
-    public void positiveTest() {
+    public void testPositive() {
         assertTrue(numberSchema.positive().isValid(1));
         assertTrue(numberSchema.positive().isValid(null));
         assertFalse(numberSchema.positive().isValid(-1));
     }
 
     @Test
-    public void rangeTest() {
+    public void testRange() {
         assertTrue(numberSchema.range(50, 60).isValid(55));
         assertTrue(numberSchema.range(50, 60).isValid(50));
         assertTrue(numberSchema.range(50, 60).isValid(60));
