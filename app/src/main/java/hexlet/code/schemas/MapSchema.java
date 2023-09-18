@@ -16,7 +16,7 @@ public final class MapSchema extends BaseSchema {
         return this;
     }
     public MapSchema shape(Map<String, BaseSchema> schema) {
-        addValidation().add(v -> v == null ||checkMap((Map<?, ?>) v, schema));
+        addValidation().add(v -> v == null || checkMap((Map<?, ?>) v, schema));
         return this;
     }
 

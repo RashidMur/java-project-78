@@ -1,7 +1,5 @@
 package hexlet.code.schemas;
 
-import java.util.Map;
-
 public final class NumberSchema extends BaseSchema {
     public NumberSchema() {
         predicates.add(v -> v instanceof Integer || v == null);

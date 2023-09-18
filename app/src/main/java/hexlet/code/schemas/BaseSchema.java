@@ -8,14 +8,14 @@ public class BaseSchema {
 
     protected List<Predicate<Object>> predicates = new ArrayList<>();
 
-
     /**
      *
      * @return return a ArrayList of checks
      */
     protected List<Predicate<Object>> addValidation() {
-         return predicates;
-     }
+
+        return predicates;
+    }
 
     /**
      *
