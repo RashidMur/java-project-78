@@ -1,23 +1,25 @@
 package hexlet.code.schemas;
 
 
+
 public final class StringSchema extends BaseSchema {
     public StringSchema() {
-        predicates.add(v -> v instanceof String || v == null);
+        this.addValidation(v -> v instanceof String || v == null);
     }
 
+    @Override
     public StringSchema required() {
-        addValidation().add(v -> v instanceof String && !((String) v).isEmpty());
+        this.addValidation(v -> v != null && !v.toString().isEmpty());
         return this;
     }
 
     public StringSchema minLength(int lenght) {
-        addValidation().add(v -> v == null || v.toString().length() >= lenght);
+        this.addValidation(v -> v == null || v.toString().length() >= lenght);
         return this;
     }
 
     public StringSchema contains(String str) {
-        addValidation().add(v -> v == null || v.toString().contains(str));
+        this.addValidation(v -> v == null || v.toString().contains(str));
         return this;
     }
 }

@@ -8,7 +8,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public final class TestStringSchema {
-    private String testString = "Testing the lines";
+    final String testStringLong = "Testing the long lines ";
+    final String testStringShort = "Test";
     private StringSchema schema;
     @BeforeEach
     public void inputTestSchema() {
@@ -17,25 +18,23 @@ public final class TestStringSchema {
     }
     @Test
     public void testRequired() {
-        assertTrue(schema.isValid(""));
-
         schema.required();
-
-        assertFalse(schema.isValid(""));
+        assertTrue(schema.isValid(testStringLong));
+        assertFalse(schema.isValid(null));
         assertFalse(schema.isValid(2));
-
+        assertFalse(schema.isValid(""));
     }
     @Test
     public void testMinLength() {
-        assertTrue(schema.minLength(2).isValid(testString));
-        assertFalse(schema.minLength(40).isValid(testString));
+        schema.minLength(10);
+        assertTrue(schema.isValid(testStringLong));
+        assertFalse(schema.isValid(testStringShort));
     }
 
     @Test
     public void testContains() {
-        assertTrue(schema.contains("Testing").isValid(testString));
-        assertTrue(schema.contains("the").isValid(testString));
-        assertFalse(schema.contains("lines1").isValid(testString));
-        assertFalse(schema.isValid(testString));
+        schema.contains("long");
+        assertTrue(schema.isValid(testStringLong));
+        assertFalse(schema.isValid(testStringShort));
     }
 }

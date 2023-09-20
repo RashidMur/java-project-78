@@ -17,29 +17,28 @@ public final class TestNumberSchema {
     }
     @Test
     public void testRequired() {
-        assertTrue(numberSchema.isValid(0));
+        numberSchema.required();
         assertTrue(numberSchema.isValid(15));
-
-        assertFalse(numberSchema.required().isValid(null));
-
-        assertFalse(numberSchema.isValid("inputNumber"));
         assertFalse(numberSchema.isValid(null));
-        assertFalse(numberSchema.isValid(25.55));
+        assertFalse(numberSchema.isValid("String"));
+        assertFalse(numberSchema.isValid(1.1));
     }
 
     @Test
     public void testPositive() {
-        assertTrue(numberSchema.positive().isValid(1));
-        assertTrue(numberSchema.positive().isValid(null));
-        assertFalse(numberSchema.positive().isValid(-1));
+        numberSchema.positive();
+        assertTrue(numberSchema.isValid(1));
+        assertTrue(numberSchema.isValid(null));
+        assertFalse(numberSchema.isValid(-1));
+
     }
 
     @Test
     public void testRange() {
-        assertTrue(numberSchema.range(50, 60).isValid(55));
-        assertTrue(numberSchema.range(50, 60).isValid(50));
-        assertTrue(numberSchema.range(50, 60).isValid(60));
-
+        numberSchema.range(50, 60);
+        assertTrue(numberSchema.isValid(55));
+        assertTrue(numberSchema.isValid(50));
+        assertTrue(numberSchema.isValid(60));
         assertFalse(numberSchema.isValid(30));
         assertFalse(numberSchema.isValid(100));
     }

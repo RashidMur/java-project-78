@@ -4,19 +4,23 @@ import java.util.Map;
 
 public final class MapSchema extends BaseSchema {
     public MapSchema() {
-        predicates.add(v -> v instanceof Map<?, ?> || v == null);
+
+        this.addValidation(v -> v instanceof Map<?, ?> || v == null);
     }
+
+    @Override
     public MapSchema required() {
-        addValidation().add(v -> v instanceof Map<?, ?>);
+        this.addValidation(v -> v instanceof Map<?, ?>);
         return this;
     }
 
     public MapSchema sizeof(int size) {
-        addValidation().add(v -> v == null || ((Map<?, ?>) v).size() == size);
+        this.addValidation(v -> v == null || ((Map<?, ?>) v).size() == size);
         return this;
     }
+
     public MapSchema shape(Map<String, BaseSchema> schema) {
-        addValidation().add(v -> v == null || checkMap((Map<?, ?>) v, schema));
+        this.addValidation(v -> v == null || checkMap((Map<?, ?>) v, schema));
         return this;
     }
 

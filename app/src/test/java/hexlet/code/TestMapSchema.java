@@ -21,22 +21,29 @@ public final class TestMapSchema {
     }
     @Test
     public void testRequired() {
-        assertTrue(schema.isValid(null));
         schema.required();
+        assertFalse(schema.isValid("String"));
         assertFalse(schema.isValid(null));
+        assertFalse(schema.isValid(10));
+
+        Map<String, String> data = new HashMap<>();
+        assertTrue(schema.isValid(data));
+
     }
 
     @Test
     public void testSizeof() {
+
         Map<String, String> data = new HashMap<>();
-        assertTrue(schema.isValid(data));
-        data.put("key1", "value1");
 
         schema.sizeof(2);
-
+        data.put("key1", "value1");
         assertFalse(schema.isValid(data));
         data.put("key2", "value2");
         assertTrue(schema.isValid(data));
+
+        schema.sizeof(3);
+        assertFalse(schema.isValid(data));
     }
 
     @Test

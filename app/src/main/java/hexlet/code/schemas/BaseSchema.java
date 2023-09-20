@@ -2,28 +2,39 @@ package hexlet.code.schemas;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Predicate;
 
 public class BaseSchema {
 
-    protected List<Predicate<Object>> predicates = new ArrayList<>();
+    /**
+     * Adds a check for the required presence of a value.
+     * @return An instance of this object with the added test.
+     */
+    public BaseSchema required()  {
+
+        this.addValidation(Objects::nonNull);
+        return this;
+    }
+
+    private final List<Predicate<Object>> listOfVolitions = new ArrayList<>();
 
     /**
-     *
-     * @return return a ArrayList of checks
+     * Adds a check to the list of tests.
+     * @param predicates The check to add to the list.
      */
-    protected List<Predicate<Object>> addValidation() {
+    void addValidation(Predicate<Object> predicates) {
 
-        return predicates;
+        listOfVolitions.add(predicates);
     }
 
     /**
-     *
+     * Checks whether the given value is valid according to the set of tests.
      * @param obj we get a list of tests
      * @return check if all tests are true
      */
     public boolean isValid(Object obj) {
 
-        return predicates.stream().allMatch(v -> v.test(obj));
+        return listOfVolitions.stream().allMatch(v -> v.test(obj));
     }
 }
