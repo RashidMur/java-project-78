@@ -8,8 +8,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public final class TestStringSchema {
-    final String testStringLong = "Testing the long lines ";
-    final String testStringShort = "Test";
+    private String testStringLong = "Testing the long lines ";
+    private String testStringShort = "Test";
     private StringSchema schema;
     @BeforeEach
     public void inputTestSchema() {
