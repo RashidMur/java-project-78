@@ -10,7 +10,7 @@ public final class MapSchema extends BaseSchema {
 
     @Override
     public MapSchema required() {
-        this.addValidation(v -> v instanceof Map<?, ?>);
+        super.required();
         return this;
     }
 

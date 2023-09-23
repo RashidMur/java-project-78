@@ -1,6 +1,5 @@
 package hexlet.code.schemas;
 
-import java.util.Objects;
 
 public final class NumberSchema extends BaseSchema {
     public NumberSchema() {
@@ -8,7 +7,7 @@ public final class NumberSchema extends BaseSchema {
     }
     @Override
     public NumberSchema required() {
-        this.addValidation(Objects::nonNull);
+        super.required();
         return this;
     }
 
