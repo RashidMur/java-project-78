@@ -1,6 +1,5 @@
 plugins {
     id 'java'
-    id 'application'
     id 'checkstyle'
     id 'jacoco'
 }
@@ -19,10 +18,6 @@ dependencies {
     testImplementation platform('org.junit:junit-bom:5.9.3')
     testImplementation('org.junit.jupiter:junit-jupiter-api:5.9.3')
     testRuntimeOnly('org.junit.jupiter:junit-jupiter-engine:5.9.3')
-}
-
-application {
-    mainClass = 'hexlet.code.App'
 }
 
 jacocoTestReport {
